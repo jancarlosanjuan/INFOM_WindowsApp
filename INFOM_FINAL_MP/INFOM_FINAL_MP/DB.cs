@@ -54,11 +54,7 @@ namespace INFOM_FINAL_MP
                         command.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
                     }
 
-                    if (command.ExecuteNonQuery() == 0)
-                    {
-                        command = null;
-                    }
-
+                    command.ExecuteNonQuery();
                     connection.Close();
                 }
             }
