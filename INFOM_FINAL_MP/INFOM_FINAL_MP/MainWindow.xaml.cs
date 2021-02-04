@@ -1,4 +1,6 @@
-﻿using System;
+﻿//sql stuff
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +25,24 @@ namespace INFOM_FINAL_MP
         public MainWindow()
         {
             InitializeComponent();
+            //establish connection to db
+            DB.EstablishConnection();
+        }
+
+
+        private void MapStatsButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void PlayerButton_Click(object sender, RoutedEventArgs e)
         {
-            sql_2_3.Text = "Wadizup";
+            sql_2_2.Text = "Wadizup";
+            //grab the username
+            string steam_name = SearchBar.Text;
+
+            //   Users user = QUERY.GetUser(steam_name);
+            DataGrid.ItemsSource = QUERY.getDataTable(steam_name).DefaultView;
         }
     }
 }
