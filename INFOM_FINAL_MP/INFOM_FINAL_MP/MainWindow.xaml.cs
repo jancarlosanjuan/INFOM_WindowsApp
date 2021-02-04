@@ -27,7 +27,7 @@ namespace INFOM_FINAL_MP
             // PlayerDeaths.Text = user.TotalDeaths.ToString();
             //  PlayerWins.Text = user.TotalWins.ToString();
             //  PlayerLosses.Text = user.TotalLosses.ToString();
-            DataGrid.ItemsSource = DBQuery.GetUserFromName2(playerId).DefaultView;
+            DataGrid.ItemsSource = DBQuery.GetPlayerFromName2(playerId).DefaultView;
 
         }
     }
