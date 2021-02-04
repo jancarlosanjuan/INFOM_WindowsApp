@@ -1,27 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
-using System.Threading.Tasks;
-
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace INFOM_FINAL_MP
 {
     public static class DB
     {
         private static MySqlConnection connection;
-        private static MySqlCommand command = null;
+        private static MySqlCommand command;
         private static DataTable dataTable;
         private static MySqlDataAdapter dataAdapter;
 
@@ -32,44 +19,51 @@ namespace INFOM_FINAL_MP
                 MySqlConnectionStringBuilder stringBuilder = new MySqlConnectionStringBuilder();
                 stringBuilder.Server = "127.0.0.1";
                 stringBuilder.UserID = "root";
-                stringBuilder.Password = "";
-                stringBuilder.Database = "CSGO";
+                stringBuilder.Password = "Admin12345";
+                stringBuilder.Database = "csgo";
                 stringBuilder.SslMode = MySqlSslMode.None;
                 stringBuilder.AllowPublicKeyRetrieval = true;
                 stringBuilder.AutoEnlist = true;
+                stringBuilder.AllowUserVariables = true;
                 connection = new MySqlConnection(stringBuilder.ToString());
 
-                //get the logger thingy
-                MessageBox.Show("Database connection successful", "Connection", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Get the logger
+                // MessageBox.Show("Database connection successful", "Connection", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 MessageBox.Show("Connection Failed!");
             }
         }
 
-
-        //get mysql commands
-        public static MySqlCommand RunQuery(string query, string username)
+        // E.g. "DB.RunQuery("SELECT * FROM players;");
+        // E.g. "DB.RunQuery("SELECT * FROM players WHERE player_id = @player_id;", new MySqlParameter("@player_id", "1234567890"));
+        public static MySqlCommand RunQuery(string query, params MySqlParameter[] parameters)
         {
             try
             {
-                if(connection != null)
+                if (connection != null)
                 {
                     connection.Open();
                     command = connection.CreateCommand();
                     command.CommandType = CommandType.Text;
                     command.CommandText = query;
-                    command.Parameters.AddWithValue("@steam_name", username);
+
+                    foreach (MySqlParameter parameter in parameters)
+                    {
+                        command.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
+                    }
+
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Invalid!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Invalid query!", MessageBoxButton.OK, MessageBoxImage.Error);
                 connection.Close();
             }
+
             return command;
         }
     }

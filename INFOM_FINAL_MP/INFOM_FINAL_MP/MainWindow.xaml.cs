@@ -1,34 +1,15 @@
 ﻿//sql stuff
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace INFOM_FINAL_MP
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            //establish connection to db
             DB.EstablishConnection();
         }
-
 
         private void MapStatsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -37,12 +18,15 @@ namespace INFOM_FINAL_MP
 
         private void PlayerButton_Click(object sender, RoutedEventArgs e)
         {
-            sql_2_2.Text = "Wadizup";
-            //grab the username
-            string steam_name = SearchBar.Text;
+            string playerId = SearchBar.Text;
+            User user = DBQuery.GetUserFromId(playerId);
 
-            //   Users user = QUERY.GetUser(steam_name);
-            DataGrid.ItemsSource = QUERY.getDataTable(steam_name).DefaultView;
+            PlayerName.Text = user.SteamName;
+            PlayerKD.Text = user.KdRatio.ToString("F2");
+            PlayerKills.Text = user.TotalKills.ToString();
+            PlayerDeaths.Text = user.TotalDeaths.ToString();
+            PlayerWins.Text = user.TotalWins.ToString();
+            PlayerLosses.Text = user.TotalLosses.ToString();
         }
     }
 }

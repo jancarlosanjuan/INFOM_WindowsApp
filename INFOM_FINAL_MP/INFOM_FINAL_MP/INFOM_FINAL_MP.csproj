@@ -59,8 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Users.cs" />
-    <Compile Include="QUERY.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="DBQuery.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
