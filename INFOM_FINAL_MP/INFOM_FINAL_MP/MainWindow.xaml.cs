@@ -9,6 +9,7 @@ namespace INFOM_FINAL_MP
         {
             InitializeComponent();
             DB.EstablishConnection();
+         //   MessageBox.Show("Sign In", )
         }
 
         private void MapStatsButton_Click(object sender, RoutedEventArgs e)

@@ -57,6 +57,29 @@ namespace INFOM_FINAL_MP
             return true;
         }
 
+        public static ClientUser getClientUser(string username)
+        {
+            command = DB.RunQuery("select * from users where username = @username limit 1;",
+                new MySqlParameter("@username", username));
+            ClientUser clientuser = null;
+            if(command != null)
+            {
+                dataTable = new DataTable();
+                dataAdapter = new MySqlDataAdapter(command);
+                dataAdapter.Fill(dataTable);
+
+                foreach(DataRow row in dataTable.Rows)
+                {
+                    string currentUsername = row["username"].ToString();//change this to username
+                    string currentPassword = row["password"].ToString();//change this later
+                    string currentisadmin = row["is_admin"].ToString();//change this later
+                    clientuser = new ClientUser(currentUsername, currentPassword, currentisadmin);
+                }
+            }
+            return clientuser;
+        }
+
+
         public static DataTable GetPlayerFromId2(string playerId)
         {
             //string query = "select * from match_player left join players on players.player_id = match_player.player_id where players.steamName = (@steamName) limit 1";

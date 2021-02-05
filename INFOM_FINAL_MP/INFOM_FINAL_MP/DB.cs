@@ -28,7 +28,7 @@ namespace INFOM_FINAL_MP
                 connection = new MySqlConnection(stringBuilder.ToString());
 
                 // Get the logger
-                // MessageBox.Show("Database connection successful", "Connection", MessageBoxButton.OK, MessageBoxImage.Information);
+                 MessageBox.Show("Database connection successful", "Connection", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception e)
             {

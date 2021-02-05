@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:INFOM_FINAL_MP"
+        WindowStartupLocation="CenterScreen"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -33,6 +34,8 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
             <!-- last column for db-->
             <ColumnDefinition Width="*" />
             <!-- nice -->
@@ -45,6 +48,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
 
@@ -52,9 +58,11 @@
 
         <TextBox x:Name="SearchBar"
                  Grid.Column="2" Grid.Row="1"
-                 Grid.ColumnSpan="4"
+                 Grid.ColumnSpan="5"
                  Text=""
-				 Margin="10,10" />
+				 Margin="10,10"
+                 TextWrapping="WrapWithOverflow" ClipToBounds="True" VerticalAlignment="Center" MaxLength="15"
+                 />
         <!-- Main Title-->
         <TextBlock x:Name="MainTitle"
                    Grid.Column="1" Grid.Row="1" 
@@ -66,8 +74,8 @@
         <!-- Data Grid -->
         <DataGrid x:Name="DataGrid"
                   Grid.Column="2" Grid.Row="2"
-                  Margin="10,10"
-                  Grid.ColumnSpan="9" Grid.RowSpan="5" IsReadOnly="True" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,10,0,0"
+                  Margin="10,10,10,0"
+                  Grid.ColumnSpan="9" Grid.RowSpan="8" IsReadOnly="True" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,10,0,0" Height="313" VerticalAlignment="Top"
                  
                   >
             <DataGrid.OpacityMask>
@@ -79,8 +87,8 @@
             <DataGrid.Background>
                 <ImageBrush ImageSource="Grey.png" Stretch="UniformToFill"/>
             </DataGrid.Background>
-            
-           
+
+
         </DataGrid>
         <!-- buttons to change views-->
         <Button x:Name="PlayerButton" 
@@ -92,12 +100,19 @@
 				Grid.Column="1" Grid.Row="4"
 				Content="Map Stats"
 				Margin="10,10" Click="MapStatsButton_Click"/>
+        <Button x:Name="AchievementsButton" 
+				Grid.Column="1" Grid.Row="5"
+				Content="Achievements"
+				Margin="10,10" Click="MapStatsButton_Click"/>
+        <Button x:Name="WeaponsButton" 
+				Grid.Column="1" Grid.Row="6"
+				Content="Weapons"
+				Margin="10,10" Click="MapStatsButton_Click"/>
 
         <!-- Contents go here-->
-        <TextBlock x:Name="PlayerName" Grid.Column="6" Grid.Row="1" 
-				   Text="Enter your ID!"
-				   Margin="20,10"
-                   Grid.ColumnSpan="2" />
+        <TextBlock x:Name="PlayerName" Grid.Column="10" Grid.Row="1" 
+				   Text="Player Name"
+				   Margin="0,13,303,7" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
 
         <TextBlock x:Name="PlayerKD"
                    Grid.Column="2" Grid.Row="3" 
@@ -119,5 +134,39 @@
                    Grid.Column="6" Grid.Row="3" 
                    Margin="10,10"
                    Text="" />
+
+        <Button
+  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="323,0,30,6" Grid.Row="1">
+            <materialDesign:PackIcon
+    Kind="Delete"
+    Height="24"
+    Width="24" 
+                Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        </Button>
+        <Button
+  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="259,0,94,6" Grid.Row="1">
+            <materialDesign:PackIcon
+    Kind="Update"
+    Height="24"
+    Width="24" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        </Button>
+        <Button
+  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="199,0,154,6" Grid.Row="1">
+            <materialDesign:PackIcon
+    Kind="Upload"
+    Height="24"
+    Width="24" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        </Button>
+        <Button
+  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="141,0,212,6" Grid.Row="1">
+            <materialDesign:PackIcon
+    Kind="Pencil"
+    Height="24"
+    Width="24" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        </Button>
     </Grid>
 </Window>
