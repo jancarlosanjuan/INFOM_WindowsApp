@@ -15,6 +15,9 @@
         public int TotalWins { get; }
         public int TotalLosses { get; }
         public float WinRate { get; }
+        public int TotalShots { get; }
+        public int TotalHits { get; }
+        public float Accuracy { get; }
 
         // Weapons
         public int TotalKillsFamas { get; }
@@ -40,7 +43,7 @@
         public bool IsAchieved_RESCUE_ALL_HOSTAGES { get; }
         public bool IsAchieved_KILL_TWO_WITH_ONE_SHOT { get; }
 
-        public Player(string id, string steamName, int totalMatches,int totalKills, int totalDeaths, int totalMvps, float kdRatio, int totalWins, int totalLosses, float winRate)
+        public Player(string id, string steamName, int totalMatches,int totalKills, int totalDeaths, int totalMvps, float kdRatio, int totalWins, int totalLosses, float winRate, int totalShots, int totalHits, float accuracy)
         {
             Id = id;
             SteamName = steamName;
@@ -52,9 +55,12 @@
             TotalWins = totalWins;
             TotalLosses = totalLosses;
             WinRate = winRate;
+            TotalShots = totalShots;
+            TotalHits = totalHits;
+            Accuracy = accuracy;
         }
 
-        public Player(string id, string steamName, int totalMatches, int totalKills, int totalDeaths, int totalMvps, float kdRatio, int totalWins, int totalLosses, float winRate, int totalKillsFamas, int totalKillsAk47, int totalKillsP90, int totalShotsFamas, int totalShotsAk47, int totalShotsP90, int totalHitsFamas, int totalHitsAk47, int totalHitsP90, int totalRoundsDust2, int totalRoundsTrain, int totalRoundsInferno, int totalWinsDust2, int totalWinsTrain, int totalWinsInferno, bool isAchievedKillWithOwnGun, bool isAchievedRescueAllHostages, bool isAchievedKillTwoWithOneShot)
+        public Player(string id, string steamName, int totalMatches, int totalKills, int totalDeaths, int totalMvps, float kdRatio, int totalWins, int totalLosses, float winRate, int totalShots, int totalHits, float accuracy, int totalKillsFamas, int totalKillsAk47, int totalKillsP90, int totalShotsFamas, int totalShotsAk47, int totalShotsP90, int totalHitsFamas, int totalHitsAk47, int totalHitsP90, int totalRoundsDust2, int totalRoundsTrain, int totalRoundsInferno, int totalWinsDust2, int totalWinsTrain, int totalWinsInferno, bool isAchievedKillWithOwnGun, bool isAchievedRescueAllHostages, bool isAchievedKillTwoWithOneShot)
         {
             Id = id;
             SteamName = steamName;
@@ -66,6 +72,9 @@
             TotalWins = totalWins;
             TotalLosses = totalLosses;
             WinRate = winRate;
+            TotalShots = totalShots;
+            TotalHits = totalHits;
+            Accuracy = accuracy;
             TotalKillsFamas = totalKillsFamas;
             TotalKillsAk47 = totalKillsAk47;
             TotalKillsP90 = totalKillsP90;

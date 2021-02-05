@@ -47,13 +47,16 @@ namespace INFOM_FINAL_MP
             int totalWins = (int)csgoStatsDict["total_matches_won"];
             int totalLoses = totalMatchesPlayed - totalWins;
             float winRatio = (float)totalWins / (float)totalMatchesPlayed;
-            int totalKillsKnife = (int)csgoStatsDict["total_kills_famas"];
+            int totalShots = (int)csgoStatsDict["total_shots_fired"];
+            int totalHits = (int)csgoStatsDict["total_shots_hit"];
+            float accuracy = (float) totalHits / (float) totalShots;
+            int totalKillsFamas = (int)csgoStatsDict["total_kills_famas"];
             int totalKillsAk47 = (int)csgoStatsDict["total_kills_ak47"];
             int totalKillsP90 = (int)csgoStatsDict["total_kills_p90"];
-            int totalShotsKnife = (int)csgoStatsDict["total_shots_famas"];
+            int totalShotsFamas = (int)csgoStatsDict["total_shots_famas"];
             int totalShotsAk47 = (int)csgoStatsDict["total_shots_ak47"];
             int totalShotsP90 = (int)csgoStatsDict["total_shots_p90"];
-            int totalHitsKnife = (int)csgoStatsDict["total_hits_famas"];
+            int totalHitsFamas = (int)csgoStatsDict["total_hits_famas"];
             int totalHitsAk47 = (int)csgoStatsDict["total_hits_ak47"];
             int totalHitsP90 = (int)csgoStatsDict["total_hits_p90"];
             int totalRoundsDust2 = (int)csgoStatsDict["total_rounds_map_de_dust2"];
@@ -74,13 +77,16 @@ namespace INFOM_FINAL_MP
                 totalWins,
                 totalLoses,
                 winRatio,
-                totalKillsKnife,
+                totalShots,
+                totalHits,
+                accuracy,
+                totalKillsFamas,
                 totalKillsAk47,
                 totalKillsP90,
-                totalShotsKnife,
+                totalShotsFamas,
                 totalShotsAk47,
                 totalShotsP90,
-                totalHitsKnife,
+                totalHitsFamas,
                 totalHitsAk47,
                 totalHitsP90,
                 totalRoundsDust2,

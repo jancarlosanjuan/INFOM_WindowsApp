@@ -9,6 +9,7 @@ namespace INFOM_FINAL_MP
         {
             InitializeComponent();
             DB.EstablishConnection();
+            Steam.InitializeApi("0DC598364E5B52EBB5D7427B15096FCB");
         }
 
         private void MapStatsButton_Click(object sender, RoutedEventArgs e)
@@ -19,16 +20,11 @@ namespace INFOM_FINAL_MP
         private void PlayerButton_Click(object sender, RoutedEventArgs e)
         {
             string playerId = SearchBar.Text;
-            //User user = DBQuery.GetUserFromId(playerId);
 
-            //PlayerName.Text = user.SteamName;
-            // PlayerKD.Text = user.KdRatio.ToString("F2");
-            // PlayerKills.Text = user.TotalKills.ToString();
-            // PlayerDeaths.Text = user.TotalDeaths.ToString();
-            //  PlayerWins.Text = user.TotalWins.ToString();
-            //  PlayerLosses.Text = user.TotalLosses.ToString();
-            DataGrid.ItemsSource = DBQuery.GetPlayerFromName2(playerId).DefaultView;
+            //Player player = await Steam.GetPlayer(playerId);
+            //DBQuery.CreatePlayer(player);
 
+            DataGrid.ItemsSource = DBQuery.GetPlayerDataTableFromId(playerId).DefaultView;
         }
     }
 }
