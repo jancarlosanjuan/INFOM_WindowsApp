@@ -30,9 +30,19 @@ namespace INFOM_FINAL_MP
 
         public static DataTable GetPlayerOverviewFromId(string playerId)
         {
-            return GetQuery(DB.RunQuery(
+            DataTable overview = GetQuery(DB.RunQuery(
                 "SELECT po.total_kills AS Kills, po.total_deaths as Deaths, po.total_mvps as MVPs, po.total_wins AS Wins, po.total_loses AS Loses, po.total_shots AS `Total Shots`, po.total_hits AS `Total Hits` FROM player_overview po INNER JOIN players p ON p.player_id = po.player_id WHERE p.player_id = @player_id;",
                 new MySqlParameter("@player_id", playerId)));
+            DataTable percentiles = GetQuery(DB.RunQuery(
+                "SELECT @kill_percentile := FORMAT(kill_rank / total, 2) * 100 AS top_global_kills_performance,@death_percentile := FORMAT(death_rank / total, 2) * 100 AS top_global_deaths_performance,@mvp_percentile := FORMAT(mvp_rank / total, 2) * 100 AS top_global_mvps_performance,@win_percentile := FORMAT(win_rank / total, 2) * 100 AS top_global_wins_performance,@loses_percentile := FORMAT(loses_rank / total, 2) * 100 AS top_global_loses_performance,@shot_percentile := FORMAT(shot_rank / total, 2) * 100 AS top_global_shots_performance,@hit_percentile := FORMAT(hit_rank / total, 2) * 100 AS top_global_hits_performance FROM (SELECT COUNT(DISTINCT players.player_id) AS total FROM players) AS amount,(SELECT players.player_id, player_overview.total_kills AS kills,player_overview.total_deaths AS deaths, player_overview.total_mvps AS mvps,player_overview.total_wins AS wins, player_overview.total_loses AS loses,player_overview.total_shots AS shots, player_overview.total_hits AS hits,RANK() OVER (ORDER BY player_overview.total_kills DESC) AS kill_rank,RANK() OVER (ORDER BY player_overview.total_deaths DESC) AS death_rank,RANK() OVER (ORDER BY player_overview.total_mvps DESC) AS mvp_rank,RANK() OVER (ORDER BY player_overview.total_wins DESC) AS win_rank,RANK() OVER (ORDER BY player_overview.total_loses DESC) AS loses_rank,RANK() OVER (ORDER BY player_overview.total_shots DESC) AS shot_rank,RANK() OVER (ORDER BY player_overview.total_hits DESC) AS hit_rank FROM players INNER JOIN player_overview ON players.player_id = player_overview.player_id GROUP BY players.player_id) AS total_stats WHERE @player_id = total_stats.player_id;",
+                new MySqlParameter("@player_id", playerId)));
+
+            if (percentiles.Rows.Count > 0)
+            {
+                overview.Rows.Add(percentiles.Rows[0].ItemArray);
+            }
+
+            return overview;
         }
 
         public static DataTable GetPlayerMapsFromId(string playerId)
@@ -153,21 +163,21 @@ namespace INFOM_FINAL_MP
             // Insert KILL_WITH_OWN_GUN achievement
             if (DB.RunQuery(insertAchievementQuery,
                 new MySqlParameter("@player_id", player.Id),
-                new MySqlParameter("@achievement_name", "KILL_WITH_OWN_GUN"),
+                new MySqlParameter("@achievement_name", "Kill With Own Gun"),
                 new MySqlParameter("@is_achieved", player.IsAchieved_KILL_WITH_OWN_GUN)) == null)
                 return false;
 
             // Insert RESCUE_ALL_HOSTAGES achievement
             if (DB.RunQuery(insertAchievementQuery,
                 new MySqlParameter("@player_id", player.Id),
-                new MySqlParameter("@achievement_name", "RESCUE_ALL_HOSTAGES"),
+                new MySqlParameter("@achievement_name", "Rescue All Hostages"),
                 new MySqlParameter("@is_achieved", player.IsAchieved_RESCUE_ALL_HOSTAGES)) == null)
                 return false;
 
             // Insert KILL_TWO_WITH_ONE_SHOT achievement
             if (DB.RunQuery(insertAchievementQuery,
                 new MySqlParameter("@player_id", player.Id),
-                new MySqlParameter("@achievement_name", "KILL_TWO_WITH_ONE_SHOT"),
+                new MySqlParameter("@achievement_name", "Kill 2 With 1 Shot"),
                 new MySqlParameter("@is_achieved", player.IsAchieved_KILL_TWO_WITH_ONE_SHOT)) == null)
                 return false;
 
@@ -247,21 +257,21 @@ namespace INFOM_FINAL_MP
             // Update KILL_WITH_OWN_GUN achievement
             if (DB.RunQuery(achievementQuery,
                 new MySqlParameter("@player_id", player.Id),
-                new MySqlParameter("@achievement_name", "KILL_WITH_OWN_GUN"),
+                new MySqlParameter("@achievement_name", "Kill With Own Gun"),
                 new MySqlParameter("@is_achieved", player.IsAchieved_KILL_WITH_OWN_GUN)) == null)
                 return false;
 
             // Update RESCUE_ALL_HOSTAGES achievement
             if (DB.RunQuery(achievementQuery,
                 new MySqlParameter("@player_id", player.Id),
-                new MySqlParameter("@achievement_name", "RESCUE_ALL_HOSTAGES"),
+                new MySqlParameter("@achievement_name", "Rescue All Hostages"),
                 new MySqlParameter("@is_achieved", player.IsAchieved_RESCUE_ALL_HOSTAGES)) == null)
                 return false;
 
             // Update KILL_TWO_WITH_ONE_SHOT achievement
             if (DB.RunQuery(achievementQuery,
                 new MySqlParameter("@player_id", player.Id),
-                new MySqlParameter("@achievement_name", "KILL_TWO_WITH_ONE_SHOT"),
+                new MySqlParameter("@achievement_name", "Kill 2 With 1 Shot"),
                 new MySqlParameter("@is_achieved", player.IsAchieved_KILL_TWO_WITH_ONE_SHOT)) == null)
                 return false;
 

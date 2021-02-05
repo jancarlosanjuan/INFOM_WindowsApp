@@ -18,15 +18,16 @@ namespace INFOM_FINAL_MP
         private void PlayerButton_Click(object sender, RoutedEventArgs e)
         {
             string playerId = SearchBar.Text;
-            DataGrid.ItemsSource = DBQuery.GetPlayerOverviewFromId(playerId).DefaultView;
+            DataView playerDataView = DBQuery.GetPlayerOverviewFromId(playerId).DefaultView;
+
+            DataGrid.ItemsSource = playerDataView;
             PlayerName.Text = DBQuery.GetPlayerName(playerId);
         }
 
         private void MapStatsButton_Click(object sender, RoutedEventArgs e)
         {
             string playerId = SearchBar.Text;
-            DataTable playerMapsDataTable = DBQuery.GetPlayerMapsFromId(playerId);
-            DataGrid.ItemsSource = playerMapsDataTable.DefaultView;
+            DataGrid.ItemsSource = DBQuery.GetPlayerMapsFromId(playerId).DefaultView;
             PlayerName.Text = DBQuery.GetPlayerName(playerId);
         }
 
