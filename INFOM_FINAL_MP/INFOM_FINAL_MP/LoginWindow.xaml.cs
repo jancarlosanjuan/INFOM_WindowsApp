@@ -61,8 +61,8 @@ namespace INFOM_FINAL_MP
                     MainWindow mainwindow = new MainWindow();
                     mainwindow.Show();
 
-                    mainwindow.Pencil.Visibility = Visibility.Hidden;
-                    mainwindow.Upload.Visibility = Visibility.Hidden;
+                    // mainwindow.Pencil.Visibility = Visibility.Hidden;
+                    // mainwindow.Upload.Visibility = Visibility.Hidden;
                     mainwindow.Update.Visibility = Visibility.Hidden;
                     mainwindow.Delete.Visibility = Visibility.Hidden;
                     Close();

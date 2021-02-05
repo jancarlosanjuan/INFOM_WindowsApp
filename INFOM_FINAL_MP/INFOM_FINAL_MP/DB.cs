@@ -19,7 +19,7 @@ namespace INFOM_FINAL_MP
                 MySqlConnectionStringBuilder stringBuilder = new MySqlConnectionStringBuilder();
                 stringBuilder.Server = "127.0.0.1";
                 stringBuilder.UserID = "root";
-                stringBuilder.Password = "1225";
+                stringBuilder.Password = "Admin12345";
                 stringBuilder.Database = "csgo";
                 stringBuilder.SslMode = MySqlSslMode.None;
                 stringBuilder.AllowPublicKeyRetrieval = true;
@@ -28,7 +28,7 @@ namespace INFOM_FINAL_MP
                 connection = new MySqlConnection(stringBuilder.ToString());
 
                 // Get the logger
-                 MessageBox.Show("Database connection successful", "Connection", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Database connection successful", "Connection", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception e)
             {

@@ -14,7 +14,7 @@
         FontFamily="Century Gothic"
         
         mc:Ignorable="d" 
-        Title="Stat Track" Height="450" Width="800">
+        Title="Stat Track" Height="450" Width="1000">
 
     <Grid>
         <Grid.Background>
@@ -61,7 +61,7 @@
                  Grid.ColumnSpan="5"
                  Text=""
 				 Margin="10,10"
-                 TextWrapping="WrapWithOverflow" ClipToBounds="True" VerticalAlignment="Center" MaxLength="15"
+                 TextWrapping="WrapWithOverflow" ClipToBounds="True" VerticalAlignment="Center" MaxLength="20"
                  />
         <!-- Main Title-->
         <TextBlock x:Name="MainTitle"
@@ -96,18 +96,18 @@
 				Content="Player Stats"
 				Margin="10,10" Click="PlayerButton_Click"/>
 
-        <Button x:Name="MatchStatsButton" 
+        <Button x:Name="MapStatsButton" 
 				Grid.Column="1" Grid.Row="4"
-				Content="Match Stats"
-				Margin="10,10" Click="MatchStatsButton_Click"/>
+				Content="Maps"
+				Margin="10,10" Click="MapStatsButton_Click"/>
         <Button x:Name="AchievementsButton" 
 				Grid.Column="1" Grid.Row="5"
 				Content="Achievements"
-				Margin="10,10" />
+				Margin="10,10" Click="AchievementsButton_Click" />
         <Button x:Name="WeaponsButton" 
 				Grid.Column="1" Grid.Row="6"
 				Content="Weapons"
-				Margin="10,10"/>
+				Margin="10,10" Click="WeaponsButton_Click"/>
 
         <!-- Contents go here-->
         <TextBlock x:Name="PlayerName" Grid.Column="10" Grid.Row="1" 
@@ -137,7 +137,7 @@
 
         <Button x:Name="Delete"
   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="323,0,30,6" Grid.Row="1">
+  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="323,0,30,6" Grid.Row="1" Click="DeleteButton_Click">
             <materialDesign:PackIcon
     Kind="Delete"
     Height="24"
@@ -146,25 +146,9 @@
         </Button>
         <Button x:Name="Update"
   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="259,0,94,6" Grid.Row="1">
+  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="259,0,94,6" Grid.Row="1" Click="WriteOrRefreshButton_Click">
             <materialDesign:PackIcon
     Kind="Update"
-    Height="24"
-    Width="24" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        </Button>
-        <Button x:Name="Upload"
-  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="199,0,154,6" Grid.Row="1">
-            <materialDesign:PackIcon
-    Kind="Upload"
-    Height="24"
-    Width="24" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        </Button>
-        <Button x:Name="Pencil"
-  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-  ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="141,0,212,6" Grid.Row="1">
-            <materialDesign:PackIcon
-    Kind="Pencil"
     Height="24"
     Width="24" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Button>

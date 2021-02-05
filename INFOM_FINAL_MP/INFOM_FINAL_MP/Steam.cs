@@ -24,17 +24,32 @@ namespace INFOM_FINAL_MP
 
         public static async Task<PlayerSummaryModel> GetSteamUserStats(string steamId)
         {
-            return (await userInterface.GetPlayerSummaryAsync(ulong.Parse(steamId))).Data;
+            if (ulong.TryParse(steamId, out ulong id))
+            {
+                return (await userInterface.GetPlayerSummaryAsync(id))?.Data;
+            }
+
+            return null;
         }
 
         public static async Task<UserStatsForGameResultModel> GetSteamCsgoStats(string steamId)
         {
-             return (await userStatsInterface.GetUserStatsForGameAsync(ulong.Parse(steamId), 730)).Data;
+            if (ulong.TryParse(steamId, out ulong id))
+            {
+                return (await userStatsInterface.GetUserStatsForGameAsync(id, 730))?.Data;
+            }
+
+            return null;
         }
+
 
         public static async Task<Player> GetPlayer(string steamId)
         {
             var userStats = await GetSteamUserStats(steamId);
+
+            if (userStats == null)
+                return null;
+
             var csgoStats = await GetSteamCsgoStats(steamId);
             var csgoStatsDict = csgoStats.Stats.ToDictionary(x => x.Name, x => x.Value);
             var csgoAchievesDict = csgoStats.Achievements.ToDictionary(x => x.Name, x => x.Achieved);
