@@ -96,18 +96,18 @@
 				Content="Player Stats"
 				Margin="10,10" Click="PlayerButton_Click"/>
 
-        <Button x:Name="MapStatsButton" 
+        <Button x:Name="MatchStatsButton" 
 				Grid.Column="1" Grid.Row="4"
-				Content="Map Stats"
-				Margin="10,10" Click="MapStatsButton_Click"/>
+				Content="Match Stats"
+				Margin="10,10" Click="MatchStatsButton_Click"/>
         <Button x:Name="AchievementsButton" 
 				Grid.Column="1" Grid.Row="5"
 				Content="Achievements"
-				Margin="10,10" Click="MapStatsButton_Click"/>
+				Margin="10,10" />
         <Button x:Name="WeaponsButton" 
 				Grid.Column="1" Grid.Row="6"
 				Content="Weapons"
-				Margin="10,10" Click="MapStatsButton_Click"/>
+				Margin="10,10"/>
 
         <!-- Contents go here-->
         <TextBlock x:Name="PlayerName" Grid.Column="10" Grid.Row="1" 

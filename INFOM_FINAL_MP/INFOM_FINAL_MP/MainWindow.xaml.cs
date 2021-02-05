@@ -12,10 +12,6 @@ namespace INFOM_FINAL_MP
          //   MessageBox.Show("Sign In", )
         }
 
-        private void MapStatsButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void PlayerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -30,6 +26,12 @@ namespace INFOM_FINAL_MP
             //  PlayerLosses.Text = user.TotalLosses.ToString();
             DataGrid.ItemsSource = DBQuery.GetPlayerFromName2(playerId).DefaultView;
 
+        }
+
+        private void MatchStatsButton_Click(object sender, RoutedEventArgs e)
+        {
+            string playerId = SearchBar.Text;
+            DataGrid.ItemsSource = DBQuery.getUserMatches(playerId).DefaultView;
         }
     }
 }

@@ -293,6 +293,31 @@ namespace INFOM_FINAL_MP
             return clientuser;
         }
 
+        public static DataTable getUserMatches(string username)
+        {
+
+
+            command = DB.RunQuery("select players.steam_name, team, kills, deaths, assists, score, mvps from match_player left join players on players.player_id = match_player.player_id and players.steam_name = @username;", new MySqlParameter("@username", username));
+
+            ClientUser clientuser = null;
+            if (command != null)
+            {
+                dataTable = new DataTable();
+                dataAdapter = new MySqlDataAdapter(command);
+                dataAdapter.Fill(dataTable);
+
+                /*foreach (DataRow row in dataTable.Rows)
+                {
+                    string currentUsername = row["username"].ToString();//change this to username
+                    string currentPassword = row["password"].ToString();//change this later
+                    string currentisadmin = row["is_admin"].ToString();//change this later
+                    clientuser = new ClientUser(currentUsername, currentPassword, currentisadmin);
+                }*/
+            }
+            return dataTable;
+
+        }
+
 
         public static DataTable GetPlayerFromId2(string playerId)
         {
