@@ -69,6 +69,7 @@ namespace INFOM_FINAL_MP
         public static bool CreatePlayer(Player player)
         {
             string insertPlayerQuery = "INSERT INTO players(player_id, steam_name) VALUES (@player_id, @steam_name);";
+            string insertPlayerOverviewQuery = "INSERT INTO player_overview VALUES (@player_id, @total_kills, @total_deaths, @total_mvps, @total_wins, @total_loses, @total_shots, @total_hits);";
             string insertWeaponQuery = "SELECT @weapon_id:=weapons.weapon_id FROM weapons WHERE @weapon_name = weapons.weapon_name; INSERT INTO player_weapon_stats(weapon_id, player_id, kills, shots_fired, shots_hit) VALUES (@weapon_id, @player_id, @kills, @shots_fired, @shots_hit);";
             string insertMapQuery = "SELECT @map_id:=maps.map_id FROM maps WHERE @map_name = maps.map_name; INSERT INTO player_map_stats(map_id, player_id, rounds, wins) VALUES (@map_id, @player_id, @rounds, @wins);";
             string insertAchievementQuery = "SELECT @achievement_id:=achievements.achievement_id FROM achievements WHERE @achievement_name = achievements.achievement_name; INSERT INTO player_achievement_stats(achievement_id, player_id, is_achieved) VALUES(@achievement_id, @player_id, @is_achieved);";
@@ -76,6 +77,19 @@ namespace INFOM_FINAL_MP
             // Insert player
             if (DB.RunQuery(insertPlayerQuery,
                 new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@steam_name", player.SteamName)) == null)
+                return false;
+
+            // Insert player overview
+            if (DB.RunQuery(insertPlayerOverviewQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@total_kills", player.TotalKills),
+                new MySqlParameter("@total_deaths", player.TotalDeaths),
+                new MySqlParameter("@total_mvps", player.TotalMvps),
+                new MySqlParameter("@total_wins", player.TotalWins),
+                new MySqlParameter("@total_loses", player.TotalLosses),
+                new MySqlParameter("@total_shots", player.TotalShots),
+                new MySqlParameter("@total_hits", player.TotalHits),
                 new MySqlParameter("@steam_name", player.SteamName)) == null)
                 return false;
 
@@ -154,6 +168,109 @@ namespace INFOM_FINAL_MP
             return true;
         }
 
+        public static bool UpdatePlayer(Player player)
+        {
+            string overviewQuery = "UPDATE player_overview SET total_kills=@total_kills, total_deaths=@total_deaths, total_mvps=@total_mvps, total_wins=@total_wins, total_loses=@total_loses, total_shots=@total_shots, total_hits=@total_hits WHERE player_id=@player_id AND weapon_id=@weapon_id;";
+            string weaponQuery = "SELECT @weapon_id := weapons.weapon_id FROM weapons WHERE @weapon_name = weapons.weapon_name; UPDATE player_weapon_stats SET kills = @kills WHERE player_id = @player_id AND weapon_id = @weapon_id; UPDATE player_weapon_stats SET shots_fired = @shots_fired WHERE player_id = @player_id AND weapon_id = @weapon_id; UPDATE player_weapon_stats SET shots_hit = @shots_hit WHERE player_id = @player_id AND weapon_id = @weapon_id;";
+            string mapQuery = "SELECT @map_id:=maps.map_id FROM maps WHERE @map_name = maps.map_name; UPDATE player_map_stats SET rounds = @rounds WHERE player_id = @player_id AND map_id = @map_id; UPDATE player_map_stats SET wins = @wins WHERE player_id = @player_id AND map_id = @map_id; ";
+            string achievementQuery = "SELECT @achievement_id:=achievements.achievement_id FROM achievements WHERE @achievement_name = achievements.achievement_name; UPDATE player_achievement_stats SET is_achieved = @is_achieved WHERE player_id = @player_id AND achievement_id = @achievement_id; ";
+
+            if (DB.RunQuery(overviewQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@total_kills", player.TotalKills),
+                new MySqlParameter("@total_deaths", player.TotalDeaths),
+                new MySqlParameter("@total_mvps", player.TotalMvps),
+                new MySqlParameter("@total_wins", player.TotalWins),
+                new MySqlParameter("@total_loses", player.TotalLosses),
+                new MySqlParameter("@total_shots", player.TotalShots),
+                new MySqlParameter("@total_hits", player.TotalHits),
+                new MySqlParameter("@steam_name", player.SteamName)) == null)
+                return false;
+
+            // Update Ak47 stats
+            if (DB.RunQuery(weaponQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@weapon_name", "Ak47"),
+                new MySqlParameter("@kills", player.TotalKillsAk47),
+                new MySqlParameter("@shots_fired", player.TotalShotsAk47),
+                new MySqlParameter("@shots_hit", player.TotalHitsAk47)) == null)
+                return false;
+
+            // Update Famas stats
+            if (DB.RunQuery(weaponQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@weapon_name", "Famas"),
+                new MySqlParameter("@kills", player.TotalKillsFamas),
+                new MySqlParameter("@shots_fired", player.TotalShotsFamas),
+                new MySqlParameter("@shots_hit", player.TotalHitsFamas)) == null)
+                return false;
+
+            // Update P90 stats
+            if (DB.RunQuery(weaponQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@weapon_name", "P90"),
+                new MySqlParameter("@kills", player.TotalKillsP90),
+                new MySqlParameter("@shots_fired", player.TotalShotsP90),
+                new MySqlParameter("@shots_hit", player.TotalHitsP90)) == null)
+                return false;
+
+            // Update Dust2 stats
+            if (DB.RunQuery(mapQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@map_name", "Dust2"),
+                new MySqlParameter("@rounds", player.TotalRoundsDust2),
+                new MySqlParameter("@wins", player.TotalWinsDust2)) == null)
+                return false;
+
+            // Update Train stats
+            if (DB.RunQuery(mapQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@map_name", "Train"),
+                new MySqlParameter("@rounds", player.TotalRoundsTrain),
+                new MySqlParameter("@wins", player.TotalWinsTrain)) == null)
+                return false;
+
+            // Update Inferno stats
+            if (DB.RunQuery(mapQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@map_name", "Inferno"),
+                new MySqlParameter("@rounds", player.TotalRoundsInferno),
+                new MySqlParameter("@wins", player.TotalWinsInferno)) == null)
+                return false;
+
+            // Update KILL_WITH_OWN_GUN achievement
+            if (DB.RunQuery(achievementQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@achievement_name", "KILL_WITH_OWN_GUN"),
+                new MySqlParameter("@is_achieved", player.IsAchieved_KILL_WITH_OWN_GUN)) == null)
+                return false;
+
+            // Update RESCUE_ALL_HOSTAGES achievement
+            if (DB.RunQuery(achievementQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@achievement_name", "RESCUE_ALL_HOSTAGES"),
+                new MySqlParameter("@is_achieved", player.IsAchieved_RESCUE_ALL_HOSTAGES)) == null)
+                return false;
+
+            // Update KILL_TWO_WITH_ONE_SHOT achievement
+            if (DB.RunQuery(achievementQuery,
+                new MySqlParameter("@player_id", player.Id),
+                new MySqlParameter("@achievement_name", "KILL_TWO_WITH_ONE_SHOT"),
+                new MySqlParameter("@is_achieved", player.IsAchieved_KILL_TWO_WITH_ONE_SHOT)) == null)
+                return false;
+
+            return true;
+        }
+
+        public static bool DeletePlayer(string playerId)
+        {
+            if (DB.RunQuery("DELETE FROM match_player WHERE @player_id = player_id;DELETE FROM player_achievement_stats WHERE @player_id = player_id;DELETE FROM player_map_stats WHERE @player_id = player_id;DELETE FROM player_weapon_stats WHERE @player_id = player_id;DELETE FROM players WHERE @player_id = player_id; ",
+                new MySqlParameter("@player_id", playerId)) == null)
+                return false;
+
+            return true;
+        }
+
         public static DataTable GetPlayerFromId2(string playerId)
         {
             //string query = "select * from match_player left join players on players.player_id = match_player.player_id where players.steamName = (@steamName) limit 1";
@@ -196,9 +313,9 @@ namespace INFOM_FINAL_MP
                 new MySqlParameter("@match_assists", matchAssists),
                 new MySqlParameter("@score", score),
                 new MySqlParameter("@mvps", mvps)) == null)
-                return true;
+                return false;
 
-            return false;
+            return true;
         }
     }
 }
