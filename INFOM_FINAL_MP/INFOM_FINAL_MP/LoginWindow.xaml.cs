@@ -27,7 +27,7 @@ namespace INFOM_FINAL_MP
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("HEY");
+         //   MessageBox.Show("HEY");
             string username = Username.Text;
             string password = Password.Text;
             ClientUser clientuser = DBQuery.getClientUser(username);
@@ -37,20 +37,43 @@ namespace INFOM_FINAL_MP
                 MessageBox.Show("User does not exist!");
                 return;
             }
-            MessageBox.Show(clientuser.username);
             
             if (clientuser.Password.Equals(password))
             {
                 MessageBox.Show("Login Success!");
-                MainWindow mainwindow = new MainWindow();
-                mainwindow.Show();
-                this.Close();
+             //   MessageBox.Show(clientuser.IsAdmin.Equals("True").ToString());
+
+                //if admin
+                if (clientuser.IsAdmin.Equals("True"))
+                {
+                    MessageBox.Show("Hello Admin!");
+                    MainWindow mainwindow = new MainWindow();
+                    mainwindow.Show();
+
+
+                    
+                    Close();
+                    return;
+                }
+                else if(clientuser.IsAdmin.Equals("False"))
+                {
+                    MessageBox.Show("Hello User!");
+                    MainWindow mainwindow = new MainWindow();
+                    mainwindow.Show();
+
+                    mainwindow.Pencil.Visibility = Visibility.Hidden;
+                    mainwindow.Upload.Visibility = Visibility.Hidden;
+                    mainwindow.Update.Visibility = Visibility.Hidden;
+                    mainwindow.Delete.Visibility = Visibility.Hidden;
+                    Close();
+                    return;
+                }
             }
             else
             {
                 MessageBox.Show("Login Failed!");
             }
-            
+
         }
     }
 }

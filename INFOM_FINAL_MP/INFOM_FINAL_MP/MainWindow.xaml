@@ -135,7 +135,7 @@
                    Margin="10,10"
                    Text="" />
 
-        <Button
+        <Button x:Name="Delete"
   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
   ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="323,0,30,6" Grid.Row="1">
             <materialDesign:PackIcon
@@ -144,7 +144,7 @@
     Width="24" 
                 Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Button>
-        <Button
+        <Button x:Name="Update"
   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
   ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="259,0,94,6" Grid.Row="1">
             <materialDesign:PackIcon
@@ -152,7 +152,7 @@
     Height="24"
     Width="24" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Button>
-        <Button
+        <Button x:Name="Upload"
   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
   ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="199,0,154,6" Grid.Row="1">
             <materialDesign:PackIcon
@@ -160,7 +160,7 @@
     Height="24"
     Width="24" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Button>
-        <Button
+        <Button x:Name="Pencil"
   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
   ToolTip="MaterialDesignFloatingActionMiniAccentButton" Grid.Column="10" Margin="141,0,212,6" Grid.Row="1">
             <materialDesign:PackIcon
