@@ -1,10 +1,10 @@
-# INFOM_WindowsApp
+# GDINFMG FINALS
 PROJECT TITLE: CSGO StaTrak
 
 GROUP MEMBERS:
-	MANZANO, Jacob
-	MIRANDA, Bruce Anakin
-	SAN JUAN, Jan Carlo
+- MANZANO, Jacob;
+- MIRANDA, Bruce Anakin;
+- SAN JUAN, Jan Carlo
 
 PROJECT DESCRIPTION:
 	CSGO StaTrak is a stat tracker for CSGO, a popular competitive FPS Shooter game where tracking stats 
